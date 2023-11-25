@@ -1,0 +1,65 @@
+﻿@model ASP.Models.Home.TransferViewModel
+@{
+	ViewData["Title"] = "Transfer";
+}
+<h1>Передача даних. Моделі</h1>
+
+<p>
+	В ASP використовується дещо не традиційне для MVC розуміння моделей - 
+	тут це об'єкти, призначені для трансферу (передачі) даних між контролерами та представленнями.
+</p>
+<p>
+	Представлення за замовченням мають властивість "Model", але для її використання слід зазначити її тип даних інструкцією &commat;model на почтаку представлення.
+	Власиивість "Model" є тим параметром, що передається з виклику
+	<code>return View(model);</code>
+</p>
+
+<p>
+	Передача даних форм спряжена з додатковою проблемою повторного надсилання даних при оновлені сторінки.
+	Відповідно, запит, який приймає дані, має завершитись (Redirect). Це змусить браузер надіслати повторний запит без паарметрів.
+	Але з боку сервера слід реалізувати збереження даних між запитами.
+	Для цього слугує механізм сесій.
+	<b>Сесія (HTTP-сессія)</b> - механізм збереження даних на боці сервера з їх прив'язуванням до запиту шляхом Cookie даних
+</p>
+
+<form asp-action="ProcessTraansferForm" method="post">
+	<div class="input-group">
+		<span class="input-group-text">First and last name</span>
+		<input name="user-firstname" type="text" aria-label="First name" class="form-control">
+		<input name="user-lastname" type="text" aria-label="Last name" class="form-control">
+	</div>
+	<button type="submit" class="btn btn-outline-success m-1">Send</button>
+</form>
+
+@if (Model.FormModel?.UserFirstName != null)
+{
+	<p>
+		Є передача даних форми:
+		@Model.FormModel.UserFirstName,
+		@Model.FormModel.UserLastName
+	</p>
+}
+
+<table class="table-dark table table-hover">
+	<thead>
+		<tr>
+			<th>Параметр</th>
+			<th>Значення</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Дата</td>
+			<td>@Model.Date</td>
+		</tr>
+		<tr>
+			<td>Час</td>
+			<td>@Model.Time</td>
+		</tr>
+		<tr>
+			<td>Контролер</td>
+			<td>@Model.ControllerName</td>
+		</tr>
+	</tbody>
+</table>
+

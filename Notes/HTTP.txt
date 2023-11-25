@@ -1,0 +1,18 @@
+Структура HTTP запиту				|	Get - метод запиту
+									|	/home/index?x=10 - URL
+Get /home/index HTTP/1.1			|	/home/index - path
+Host: localhost						|	?x=10 - Query
+Connection: close					|	Host, Connection - заголовки (headers)
+									|	Ключ: значення\r\n
+Структура відповіді					|	HTTP/1.1 - протокол (sheme)
+									|	
+HTTP/1.1.200 OK						|	200 - response status code
+Connection: close					|	OK - reasin phase (status message)
+Content-type: text/html				|	
+Content-Lenght: text/html: 100500	|	
+									|	порожній рядок (\r\n)
+<!doctype html>						|	Тіло (body) - до кінцф пакету
+
+---------------------------------------------------------------------------------------------------
+Особливості:
+Метод запиту - перше "слово"
